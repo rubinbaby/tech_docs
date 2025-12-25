@@ -14,7 +14,7 @@
 
 教程：[https://documentation.ubuntu.com/desktop/en/latest/how-to/create-a-bootable-usb-stick](https://documentation.ubuntu.com/desktop/en/latest/how-to/create-a-bootable-usb-stick)
 ## 2.2、载入系统镜像
-![Pasted image 20251225104246.png](https://github.com/rubinbaby/tech_docs/blob/main/images/Pasted%20image%2020251225104246.png?raw=true)
+![Pasted image 20251225104246.png](../images/Pasted%20image%2020251225104246.png)
 
 # 3、安装
 ## 3.1、安装步骤
@@ -46,16 +46,15 @@ sudo dpkg -i sogoupinyin_*.deb
 ```
 切换fcitx：
 
-![Pasted image 20251225104756.png](https://github.com/rubinbaby/tech_docs/blob/main/images/Pasted%20image%2020251225104756.png?raw=true)
+![Pasted image 20251225104756.png](../images/Pasted%20image%2020251225104756.png)
 
 然后应用到整个系统：
 
-![Pasted image 20251225104806.png](https://github.com/rubinbaby/tech_docs/blob/main/images/Pasted%20image%2020251225104806.png?raw=true)
+![Pasted image 20251225104806.png](../images/Pasted%20image%2020251225104806.png)
 
 系统重启，添加搜狗输入法：
 
-![Pasted image 20251225104817.png](https://github.com/rubinbaby/tech_docs/blob/main/images/Pasted%20image%2020251225104817.png?raw=true)
-
+![Pasted image 20251225104817.png](../images/Pasted%20image%2020251225104817.png)
 
 ## 3.4、替换软件源
 ```shell
