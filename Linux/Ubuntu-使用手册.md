@@ -5,6 +5,7 @@
 [https://ubuntu.com/download/server](https://ubuntu.com/download/server)
 ## 1.3、Multipass
 [https://cloud.tencent.com.cn/developer/article/1982247](https://cloud.tencent.com.cn/developer/article/1982247)
+
 [https://cloud.tencent.com.cn/developer/article/2078993](https://cloud.tencent.com.cn/developer/article/2078993)
 
 # 2、制作U盘启动盘
