@@ -1,22 +1,23 @@
 # 1、下载
 ## 1.1、桌面版
-https://ubuntu.com/download/desktop
+[https://ubuntu.com/download/desktop](https://ubuntu.com/download/desktop)
 ## 1.2、服务器版
-https://ubuntu.com/download/server
+[https://ubuntu.com/download/server](https://ubuntu.com/download/server)
 ## 1.3、Multipass
-https://cloud.tencent.com.cn/developer/article/1982247
-https://cloud.tencent.com.cn/developer/article/2078993
+[https://cloud.tencent.com.cn/developer/article/1982247](https://cloud.tencent.com.cn/developer/article/1982247)
+[https://cloud.tencent.com.cn/developer/article/2078993](https://cloud.tencent.com.cn/developer/article/2078993)
 
 # 2、制作U盘启动盘
 ## 2.1、下载U盘启动软件
-https://rufus.ie/en/#download
+[https://rufus.ie/en/#download](https://rufus.ie/en/#download)
+
 教程：[https://documentation.ubuntu.com/desktop/en/latest/how-to/create-a-bootable-usb-stick](https://documentation.ubuntu.com/desktop/en/latest/how-to/create-a-bootable-usb-stick)
 ## 2.2、载入系统镜像
 ![Pasted image 20251225104246.png](https://github.com/rubinbaby/tech_docs/blob/main/images/Pasted%20image%2020251225104246.png?raw=true)
 
 # 3、安装
 ## 3.1、安装步骤
-https://cloud.tencent.com.cn/developer/article/2383208
+[https://cloud.tencent.com.cn/developer/article/2383208](https://cloud.tencent.com.cn/developer/article/2383208)
 
 ## 3.2、安装ssh
 打开Ubuntu的终端，输入：
