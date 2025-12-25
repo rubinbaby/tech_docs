@@ -47,9 +47,13 @@ sudo dpkg -i sogoupinyin_*.deb
 ![Pasted image 20251225104756.png](https://github.com/rubinbaby/tech_docs/blob/main/images/Pasted%20image%2020251225104756.png?raw=true)
 
 然后应用到整个系统：
+
 ![Pasted image 20251225104806.png](https://github.com/rubinbaby/tech_docs/blob/main/images/Pasted%20image%2020251225104806.png?raw=true)
+
 系统重启，添加搜狗输入法：
+
 ![Pasted image 20251225104817.png](https://github.com/rubinbaby/tech_docs/blob/main/images/Pasted%20image%2020251225104817.png?raw=true)
+
 
 ## 3.4、替换软件源
 ```shell
