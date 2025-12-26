@@ -82,7 +82,7 @@ deb http://security.ubuntu.com/ubuntu focal-security universe
 deb http://security.ubuntu.com/ubuntu focal-security multiverse
 EOF
 
-apt update
+sudo apt update
 ```
 ## 3.5、安装第三方软件
 ```shell
@@ -125,11 +125,23 @@ Type=Application
 Categories=Utility;
 Terminal=false
 EOF
-
 # 设置开机自启
 # 打开“启动应用程序”（Startup Applications），点击“添加”：
 # 名称：Snipaste
 # 命令：/home/xxxxxx/.local/bin/Snipaste-xxx.AppImage
 # 注释：可选
+
+# 安装obsidian软件
+# 下载官方deb软件包 https://obsidian.md/download
+sudo dpkg -i obsidian_*.deb
+
+# 安装Slack软件
+# 下载官方deb软件包 https://slack.com/downloads/linux
+sudo dpkg -i slack-desktop-*.deb
+
+# 安装Zoom软件
+# 下载官方deb软件包 https://zoom.us/download
+sudo dpkg -i zoom_*.deb
+
 ```
 
