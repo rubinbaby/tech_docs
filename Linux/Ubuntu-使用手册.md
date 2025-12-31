@@ -20,43 +20,7 @@
 ## 3.1、安装步骤
 [https://cloud.tencent.com.cn/developer/article/2383208](https://cloud.tencent.com.cn/developer/article/2383208)
 
-## 3.2、安装ssh
-打开Ubuntu的终端，输入：
-sudo apt-get install openssh-server
-安装完毕后ssh默认已启动。可以使用下述命令查看是否有进程在22端口上监听，即是否已启动：
-```shell
-netstat -nat | grep 22
-```
-## 3.3、安装搜狗输入法
-```shell
-# 安装fcitx
-sudo apt install fcitx-bin
-sudo apt-get install fcitx-table
-
-# 下载搜狗输入法安装包
-# https://shurufa.sogou.com/linux
-
-# 安装依赖 (不安装的话，无法输入中文)
-sudo apt install libqt5qml5 libqt5quick5 libqt5quickwidgets5 qml-module-qtquick2
-sudo apt install libgsettings-qt1
-
-# 安装下载的搜狗输入法
-cd ~/Downloads/
-sudo dpkg -i sogoupinyin_*.deb
-```
-切换fcitx：
-
-![Pasted image 20251225104756.png](../images/Pasted%20image%2020251225104756.png)
-
-然后应用到整个系统：
-
-![Pasted image 20251225104806.png](../images/Pasted%20image%2020251225104806.png)
-
-系统重启，添加搜狗输入法：
-
-![Pasted image 20251225104817.png](../images/Pasted%20image%2020251225104817.png)
-
-## 3.4、替换软件源
+## 3.2、替换软件源
 ```shell
 sudo cd /etc/apt
 sudo cp sources.list sources.list.backup.xxx
@@ -84,6 +48,45 @@ EOF
 
 sudo apt update
 ```
+
+## 3.3、安装ssh等基础包
+打开Ubuntu的终端，输入：
+```shell
+sudo apt-get install openssh-server net-tools curl sysstat ffmpeg
+```
+安装完毕后ssh默认已启动。可以使用下述命令查看是否有进程在22端口上监听，即是否已启动：
+```shell
+netstat -nat | grep 22
+```
+
+## 3.4、安装搜狗输入法
+安装指南： [https://shurufa.sogou.com/linux/guide](https://shurufa.sogou.com/linux/guide)
+
+```shell
+# 安装fcitx
+sudo apt install fcitx-bin
+sudo apt-get install fcitx-table
+
+# 设置fcitx开机自启动
+sudo cp /usr/share/applications/fcitx.desktop /etc/xdg/autostart/
+
+# 下载搜狗输入法安装包
+# https://shurufa.sogou.com/linux
+
+# 安装下载的搜狗输入法
+cd ~/Downloads/
+sudo dpkg -i sogoupinyin_*.deb
+
+# 安装依赖 (不安装的话，无法输入中文)
+sudo apt install libqt5qml5 libqt5quick5 libqt5quickwidgets5 qml-module-qtquick2 ibgsettings-qt1
+
+# 重启电脑
+```
+
+系统重启，添加搜狗输入法：
+
+![Pasted image 20251225104817.png](../images/Pasted%20image%2020251225104817.png)
+
 ## 3.5、安装第三方软件
 ```shell
 # 安装WPS办公软件
@@ -143,5 +146,36 @@ sudo dpkg -i slack-desktop-*.deb
 # 下载官方deb软件包 https://zoom.us/download
 sudo dpkg -i zoom_*.deb
 
+# 安装htop监控工具
+sudo apt install htop
+
+# 安装GIMP修图软件
+# 下载官方AppImage软件包 https://www.gimp.org/downloads
+# 赋予执行权限
+chmod +x GIMP-*.AppImage
+# 移动AppImage文件到固定目录
+mkdir -p ~/.local/bin
+mv ~/Downloads/GIMP-*.AppImage ~/.local/bin/
+# 下载图标
+mkdir -p ~/.local/share/icons
+mv ~/Downloads/gimp.png ~/.local/share/icons/
+# 创建.desktop桌面快捷方式文件
+cat > ~/.local/share/applications/gimp.desktop << 'EOF'
+[Desktop Entry]
+Name=GIMP
+Exec=/home/xxxxxx/.local/bin/GIMP-xxx.AppImage
+Icon=/home/xxxxxx/.local/share/icons/gimp.png
+Type=Application
+Categories=Utility;
+Terminal=false
+EOF
+# 设置开机自启
+# 打开“启动应用程序”（Startup Applications），点击“添加”：
+# 名称：GIMP
+# 命令：/home/xxxxxx/.local/bin/GIMP-xxx.AppImage
+# 注释：可选
+
+# 安装rar文件解压缩工具
+apt install unrar
 ```
 

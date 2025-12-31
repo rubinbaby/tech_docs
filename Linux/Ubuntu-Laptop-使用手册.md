@@ -24,6 +24,7 @@ sudo apt update && sudo apt install nvidia-driver-390
 sudo prime-select nvidia
 # 重启后生效
 # 核显/独显切换用 prime-select intel|nvidia
+# 切到 prime-select nvidia 后，默认整个系统使用独显渲染。
 
 # 验证（重启后运行如下命令查看独显是否工作）
 nvidia-smi
