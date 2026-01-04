@@ -86,6 +86,33 @@ wget http://mimosa-pudica.net/src/incr-0.2.zsh -O ~/.oh-my-zsh/plugins/incr/incr
 
 [https://iterm2colorschemes.com](https://iterm2colorschemes.com)
 
+### 2.1.6、自定义终端主题颜色
+```text
+Ansi 0 Color: #1D2027
+Ansi 1 Color: #8D0003
+Ansi 10 Color: #7AC100
+Ansi 11 Color: #E5E512
+Ansi 12 Color: #006EFE
+Ansi 13 Color: #BC3FBC
+Ansi 14 Color: #19E062
+Ansi 15 Color: #FFFFFF
+Ansi 2 Color: #3A7D00
+Ansi 3 Color: #E5E512
+Ansi 4 Color: #092CCD
+Ansi 5 Color: #BC3FBC
+Ansi 6 Color: #229256
+Ansi 7 Color: #FFFFFF
+Ansi 8 Color: #394047
+Ansi 9 Color: #EB0009
+Background Color: #FFFFFF
+Bold Color: #EB0009
+Cursor Color: #006EFE
+Cursor Text Color: #1D2027
+Foreground Color: #1D2027
+Selected Text Color: #4D5658
+Selection Color: #B3B1AA
+```
+
 ## 2.2、Ranger
 官方文档：[https://github.com/ranger/ranger](https://github.com/ranger/ranger)
 
@@ -100,3 +127,13 @@ Ubuntu上安装文档：[https://zhuanlan.zhihu.com/p/721712759](https://zhuanla
 ## 3.1、主题包
 [https://github.com/dexpota/kitty-themes](https://github.com/dexpota/kitty-themes)
 
+# 4、常见问题
+## 4.1、zsh: corrupt history file
+```shell
+# 备份当前历史文件
+cp ~/.zsh_history ~/.zsh_history_backup
+
+# 创建一个新的历史文件
+strings ~/.zsh_history_backup > ~/.zsh_history
+# 其中，strings命令尝试从备份文件中提取可读的字符串，并写入新的历史文件中
+```
