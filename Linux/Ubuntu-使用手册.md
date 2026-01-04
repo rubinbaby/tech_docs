@@ -46,6 +46,9 @@ deb http://security.ubuntu.com/ubuntu focal-security universe
 deb http://security.ubuntu.com/ubuntu focal-security multiverse
 EOF
 
+# 对于Ubuntu18，需要替换版本名字
+sed -i 's/focal/bionic/g' sources.list
+
 sudo apt update
 ```
 
@@ -169,11 +172,6 @@ Type=Application
 Categories=Utility;
 Terminal=false
 EOF
-# 设置开机自启
-# 打开“启动应用程序”（Startup Applications），点击“添加”：
-# 名称：GIMP
-# 命令：/home/xxxxxx/.local/bin/GIMP-xxx.AppImage
-# 注释：可选
 
 # 安装rar文件解压缩工具
 apt install unrar

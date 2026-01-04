@@ -30,6 +30,22 @@ sudo prime-select nvidia
 nvidia-smi
 ```
 
+在Ubuntu18上安装独显：
+```shell
+# 安装核心依赖
+sudo apt install xserver-xorg-core xserver-xorg-video-intel
+
+# 安装旧卡支持的专有驱动（Fermi 通常是 nvidia-driver-390）
+# sudo apt install nvidia-driver-390 bumblebee-nvidia primus
+sudo apt install nvidia-driver-390 nvidia-prime
+sudo usermod -aG bumblebee $USER
+
+# 切换会话与登录管理器（老卡更稳的组合），可换 LightDM 更稳
+sudo apt install lightdm
+sudo dpkg-reconfigure lightdm   # 选择 lightdm 为默认
+sudo reboot
+```
+
 # 2、配置静态网络
 ``` shell
 sudo cd /etc/netplan
