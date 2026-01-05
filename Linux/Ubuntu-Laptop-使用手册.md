@@ -46,6 +46,70 @@ sudo dpkg-reconfigure lightdm   # 选择 lightdm 为默认
 sudo reboot
 ```
 
+即使系统版本改为Ubuntu18，还是发生卡死现象，所以把会话固定到Xorg、用核显为主、回退到GA内核并检查驱动与扩展，能解决大多数卡死。
+```shell
+# 1. 强制使用 Xorg，会话以核显为主
+# 切核显（PRIME）
+sudo apt update
+sudo apt install -y nvidia-prime
+sudo prime-select intel
+
+# 清理强制独显的Xorg配置
+sudo rm -f /etc/X11/xorg.conf /etc/X11/xorg.conf.d/90-nvidia.conf
+
+# 重启到LightDM + Xorg
+sudo reboot
+
+# 验证当前为 Xorg
+echo $XDG_SESSION_TYPE   # 期望 x11
+
+# 2. 固定到 GA 5.4 内核栈（避免HWE与390冲突）
+sudo apt update
+sudo apt install -y linux-generic
+sudo reboot
+
+##### 以下方法未验证
+
+# 3. 进 BIOS/UEFI 关闭 Secure Boot；否则未签名的 390 模块可能被拒绝加载
+
+# 4. 切换 LightDM 的 greeter，减少桌面层问题（可选）
+sudo apt install -y slick-greeter
+sudo sed -i 's/^#*greeter-session.*/greeter-session=slick-greeter/' /etc/lightdm/lightdm.conf
+sudo systemctl restart lightdm
+
+# 5. 禁用可能导致冻结的 GNOME Shell 扩展与自启项（用户态）
+mv ~/.local/share/gnome-shell/extensions ~/.local/share/gnome-shell/extensions.bak
+mv ~/.config/autostart ~/.config/autostart.bak
+
+# 6. 显卡相关内核参数与模块设置（针对核显与旧NVIDIA）
+# 禁用Intel面板自刷新，降低冻结概率
+echo 'GRUB_CMDLINE_LINUX_DEFAULT="quiet splash i915.enable_psr=0"' | sudo tee /etc/default/grub > /dev/null
+sudo update-grub
+
+# 打开NVIDIA DRM模式（在需要独显时更稳）
+echo 'options nvidia-drm modeset=1' | sudo tee /etc/modprobe.d/nvidia-drm.conf
+sudo update-initramfs -u
+sudo reboot
+
+# 7. 按需启用独显渲染（保留核显显示）
+# 示例验证（独显渲染器应显示NVIDIA）
+DRI_PRIME=1 glxinfo | grep "OpenGL renderer"
+
+# 8. 仍卡死时的兜底与定位
+# 尝试临时禁用专有驱动，换开源栈（稳定但性能低）
+sudo apt purge 'nvidia-*'
+sudo apt install -y xserver-xorg-video-nouveau
+sudo update-initramfs -u
+sudo reboot
+
+# 收集冻结前日志（从上一次启动的内核日志）
+journalctl -b -1 -k | grep -Ei 'nvidia|nouveau|i915|hang|Xid|NVRM'
+
+# 9. 外接显示器下用全局独显（仅当外屏接到独显HDMI/DP）
+sudo prime-select nvidia
+sudo reboot
+nvidia-smi
+```
 # 2、配置静态网络
 ``` shell
 sudo cd /etc/netplan
