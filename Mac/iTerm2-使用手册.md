@@ -168,6 +168,9 @@ chmod +x ~/Library/Application\ Support/iTerm2/Scripts/AutoLaunch/remote_status.
 
 ### 3.2.1、创建用户自定义变量
 ```shell
+# 检查目标系统是否安装sysstat命令
+sudo apt install sysstat
+
 cat > ~/.iterm2_remote_status.zsh << 'EOF'
 # 每 5 秒更新一次系统指标
 function _update_iterm2_metrics() {

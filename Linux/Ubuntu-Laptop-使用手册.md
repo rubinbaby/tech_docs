@@ -110,6 +110,35 @@ sudo prime-select nvidia
 sudo reboot
 nvidia-smi
 ```
+
+## 1.3、火狐浏览器页面的字显示不全
+Ubuntu20安装了lightdm后，火狐浏览器页面的字会显示不全。
+在 Ubuntu 20.04 + LightDM 的旧机型环境下，Firefox 页面文字“显示不全/缺笔画/重叠”常见成因是中文字体缺失/缓存损坏、GPU加速（WebRender/Compositor）与旧驱动的兼容问题，或缩放/DPI设置异常。按下面顺序处理，通常可立即恢复正常显示。
+一、补齐中文字体并重建缓存
+```shell
+sudo apt update
+sudo apt install -y fonts-noto-cjk fonts-wqy-zenhei fonts-wqy-microhei fonts-noto-color-emoji
+rm -rf ~/.cache/fontconfig
+sudo fc-cache -f -v
+```
+
+确保系统语言是 UTF-8（可选）：
+```shell
+locale | grep -E 'LANG|LC_ALL'
+# 若不是 zh_CN.UTF-8，可运行：
+sudo dpkg-reconfigure locales
+```
+
+二、关闭 Firefox 硬件加速与 WebRender
+- 打开 Firefox → 设置 → 性能
+	- 取消勾选“使用推荐的性能设置”
+	- 取消勾选“可用时使用硬件加速”
+- 高级（about:config）
+	- 搜索并设置：
+		⁃ layers.acceleration.force-enabled → false
+		⁃ gfx.webrender.all → false
+- 关闭后重启 Firefox，验证页面文字是否恢复。
+
 # 2、配置静态网络
 ``` shell
 sudo cd /etc/netplan

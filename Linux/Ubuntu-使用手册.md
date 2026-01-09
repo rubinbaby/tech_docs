@@ -55,7 +55,11 @@ sudo apt update
 ## 3.3、安装ssh等基础包
 打开Ubuntu的终端，输入：
 ```shell
-sudo apt-get install openssh-server net-tools curl sysstat ffmpeg
+sudo apt-get install openssh-server net-tools curl ffmpeg
+# 安装htop监控工具
+sudo apt install htop
+# 安装rar文件解压缩工具
+apt install unrar
 ```
 安装完毕后ssh默认已启动。可以使用下述命令查看是否有进程在22端口上监听，即是否已启动：
 ```shell
@@ -136,10 +140,14 @@ EOF
 # 名称：Snipaste
 # 命令：/home/xxxxxx/.local/bin/Snipaste-xxx.AppImage
 # 注释：可选
+# 对于老电脑，可以使用flameshot来代替 https://flameshot.org/
+sudo apt install flameshot
 
 # 安装obsidian软件
 # 下载官方deb软件包 https://obsidian.md/download
 sudo dpkg -i obsidian_*.deb
+# 对于老电脑，可以安装mark-text https://github.com/marktext/marktext
+sudo snap install marktext
 
 # 安装Slack软件
 # 下载官方deb软件包 https://slack.com/downloads/linux
@@ -148,9 +156,6 @@ sudo dpkg -i slack-desktop-*.deb
 # 安装Zoom软件
 # 下载官方deb软件包 https://zoom.us/download
 sudo dpkg -i zoom_*.deb
-
-# 安装htop监控工具
-sudo apt install htop
 
 # 安装GIMP修图软件
 # 下载官方AppImage软件包 https://www.gimp.org/downloads
@@ -172,8 +177,4 @@ Type=Application
 Categories=Utility;
 Terminal=false
 EOF
-
-# 安装rar文件解压缩工具
-apt install unrar
 ```
-
