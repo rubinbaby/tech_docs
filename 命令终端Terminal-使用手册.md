@@ -67,11 +67,7 @@ exec zsh
 ```shell
 cd ~/.oh-my-zsh/plugins/
 git clone https://github.com/zsh-users/zsh-autosuggestions
-vi ~/.zshrc
-#找到plugins=(git这一行，然后下一行添加下面代码
-plugins=(
-    git zsh-autosuggestions
-)
+sed -i 's/git)/zsh-autosuggestions git)/g' ~/.zshrc
 #让~/.zshrc配置生效，执行如下命令（或者重启item2也行）
 source ~/.zshrc
 ```
@@ -111,6 +107,14 @@ Cursor Text Color: #1D2027
 Foreground Color: #1D2027
 Selected Text Color: #4D5658
 Selection Color: #B3B1AA
+```
+
+Linux Terminator配置文件：
+```shell
+# 国内
+echo "$(wget -O- https://gitee.com/rubinbaby/tech_docs/raw/master/Linux/terminator_config)" > ~/.config/terminator/config
+# 国外
+echo "$(wget -O- https://raw.githubusercontent.com/rubinbaby/tech_docs/refs/heads/main/Linux/terminator_config)" > ~/.config/terminator/config
 ```
 
 ## 2.2、Ranger
