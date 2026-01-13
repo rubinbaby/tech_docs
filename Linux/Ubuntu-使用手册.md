@@ -1,6 +1,9 @@
 # 1、下载
 ## 1.1、桌面版
-[https://ubuntu.com/download/desktop](https://ubuntu.com/download/desktop)
+Intel/AMD版本：[https://ubuntu.com/download/desktop](https://ubuntu.com/download/desktop)
+
+ARM版本：[https://cdimage.ubuntu.com/releases/24.04/release/](https://cdimage.ubuntu.com/releases/24.04/release/)
+
 ## 1.2、服务器版
 [https://ubuntu.com/download/server](https://ubuntu.com/download/server)
 ## 1.3、Multipass
@@ -23,6 +26,7 @@
 ## 3.2、替换软件源
 ```shell
 sudo cd /etc/apt
+# 1. 对于Ubuntu22.04及以下系统
 sudo cp sources.list sources.list.backup.xxx
 sudo cat > sources.list << 'EOF'
 deb http://mirrors.aliyun.com/ubuntu/ focal main restricted
@@ -46,8 +50,15 @@ deb http://security.ubuntu.com/ubuntu focal-security universe
 deb http://security.ubuntu.com/ubuntu focal-security multiverse
 EOF
 
-# 对于Ubuntu18，需要替换版本名字
+## 对于Ubuntu18，需要替换版本名字
 sed -i 's/focal/bionic/g' sources.list
+
+# 2. 对于Ubuntu24.04及以上系统
+sudo cd sources.list.d
+sudo cp ubuntu.sources ubuntu.sources.backup.xxx
+sudo sed -i 's@http://ports.ubuntu.com@http://mirrors.aliyun.com@g' ubuntu.sources
+sudo echo "" >> ubuntu.sources
+sudo sed -i 's@http://ports.ubuntu.com@http://mirrors.tuna.tsinghua.edu.cn@g' ubuntu.sources
 
 sudo apt update
 ```
@@ -95,6 +106,7 @@ sudo apt install libqt5qml5 libqt5quick5 libqt5quickwidgets5 qml-module-qtquick2
 ![Pasted image 20251225104817.png](../images/Pasted%20image%2020251225104817.png)
 
 ## 3.5、安装第三方软件
+### 3.5.1、使用内置命令安装
 ```shell
 # 安装WPS办公软件
 # 下载官方deb软件包 https://www.wps.cn/product/wpslinux
@@ -177,4 +189,110 @@ Type=Application
 Categories=Utility;
 Terminal=false
 EOF
+```
+
+### 3.5.2、使用Flatpak安装软件
+#### 3.5.2.1、配置
+- Ubuntu 18.04/20.04：apt安装flatpak后即可使用；首次需添加Flathub。
+- Ubuntu 22.04/24.04：系统自带支持更完善，按相同步骤即可。
+- 更老版本（16.04等）：仍可用，但需要启用PPA或手动安装，维护度较低。
+
+文档：[https://flathub.org/en/setup/Ubuntu](https://flathub.org/en/setup/Ubuntu)
+
+```shell
+# 1. 安装flatpak
+sudo apt install flatpak
+
+# 2. 安装GNOME Software Flatpak插件
+sudo apt install gnome-software-plugin-flatpak
+
+# 3. 添加Flathub repository
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+```
+
+#### 3.5.2.2、软件安装
+```shell
+# 安装Obsidian
+sudo flatpak install flathub md.obsidian.Obsidian
+
+# 安装GIMP
+sudo flatpak install flathub org.gimp.GIMP
+
+# 安装WPS office
+sudo flatpak install flathub cn.wps.wps_365
+
+# 安装微信
+sudo flatpak install flathub com.tencent.WeChat
+
+# 安装VLC播放器
+sudo flatpak install flathub org.videolan.VLC
+
+# 安装Flameshot截图软件
+sudo flatpak install flathub org.flameshot.Flameshot
+```
+
+### 3.5.3、使用Snap安装软件
+```shell
+# 安装GIMP
+sudo snap info GIMP
+sudo snap install gimp
+
+# 删除
+sudo snap remove --purge <应用名>
+```
+
+# 4、常见问题
+## 4.1、error while loading shared libraries: libatomic.so.1
+问题：error while loading shared libraries: libatomic.so.1: cannot open shared object file: No such file or directory
+解决：
+- 安装库并刷新链接缓存
+```shell
+sudo apt update
+sudo apt install libatomic1
+sudo ldconfig
+```
+
+- 验证是否已安装
+```shell
+ldconfig -p | grep libatomic.so.1
+```
+
+## 4.2、error while loading shared libraries: libz.so
+问题：error while loading shared libraries: libz.so: cannot open shared object file: No such file or directory
+解决：
+缺少 zlib 的共享库。安装 zlib1g 与 zlib1g-dev 即可。
+- 安装库并刷新链接缓存
+```shell
+sudo apt update
+sudo apt install zlib1g zlib1g-dev
+sudo ldconfig
+```
+
+- 验证是否已安装
+```shell
+ldconfig -p | grep libz.so
+```
+
+## 4.3、dlopen(): error loading libfuse.so.2
+问题：dlopen(): error loading libfuse.so.2     AppImages require FUSE to run.
+解决：
+缺少 libfuse.so.2 导致的；安装 FUSE 库即可解决。
+- 对于Ubuntu24.04及以上
+```shell
+sudo apt update
+
+# 默认主推 fuse3
+sudo apt install fuse3
+# 但仍可装兼容的 v2 运行库：
+sudo apt install libfuse2
+
+sudo ldconfig
+```
+
+- 对于Ubuntu 20.04和22.04
+```shell
+# 安装 FUSE v2 运行库与工具
+sudo apt update
+sudo apt install libfuse2 fuse
+sudo ldconfig
 ```
