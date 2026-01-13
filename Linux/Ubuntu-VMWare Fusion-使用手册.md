@@ -47,6 +47,7 @@ netmask = 255.255.255.0
 device = vmnet8
 `
 ```
+
 这里指定了NAT网关的地址为172.16.160.2，子网掩码为255.255.255.0。
 ## 2.2、查看Ubuntu的网络配置
 ```shell
@@ -69,10 +70,38 @@ network:
           - 8.8.4.4
 `
 ```
+
 这里可以得到Ubuntu的网关地址，查看是否和Mac虚拟机NAT网络提供的网关地址一致，如果不一致，替换之，因为网关应该是同一个IP地址。
 ## 2.3、更新网络配置
 ```shell
 sudo netplan apply
 ```
+
 [https://cloud.tencent.com.cn/developer/article/2439086](https://cloud.tencent.com.cn/developer/article/2439086)
+
+# 3、分辨率自适应
+## 3.1、使用open-vm-tools
+VMware官方推荐使用‌open-vm-tools‌替代旧版VMware Tools：
+```shell
+sudo apt update
+sudo apt install open-vm-tools-desktop # 安装桌面版工具
+sudo reboot # 重启生效
+```
+
+## 3.2、使用挂载光盘
+1. 虚拟机菜单 → `虚拟机` → `安装 VMware Tools`
+2. 在 Ubuntu 桌面挂载光盘，打开终端执行：
+```shell
+# 安装 VMware Tools
+sudo mount /dev/cdrom /mnt  # 挂载光盘
+cd /mnt
+## 如果是tar文件就先解压缩
+sudo tar -xzf VMwareTools-*.tar.gz -C /tmp
+cd /tmp/vmware-tools-distrib
+
+sudo ./vmware-install.pl  # 按提示安装
+sudo reboot  # 重启后分辨率自动适配
+```
+
+3. 重启虚拟机后分辨率自动适配（若需手动调整，跳转到方法二）。
 
