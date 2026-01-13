@@ -82,6 +82,10 @@ wget http://mimosa-pudica.net/src/incr-0.2.zsh -O ~/.oh-my-zsh/plugins/incr/incr
 
 [https://iterm2colorschemes.com](https://iterm2colorschemes.com)
 
+国外：[https://github.com/rubinbaby/ssh-terminal-themes](https://github.com/rubinbaby/ssh-terminal-themes)
+
+国内：[https://gitee.com/rubinbaby/ssh-terminal-themes](https://gitee.com/rubinbaby/ssh-terminal-themes)
+
 ### 2.1.6、自定义终端主题颜色
 ```text
 Ansi 0 Color: #1D2027
@@ -112,9 +116,9 @@ Selection Color: #B3B1AA
 Linux Terminator配置文件：
 ```shell
 # 国内
-echo "$(wget -O- https://gitee.com/rubinbaby/tech_docs/raw/master/Linux/terminator_config)" > ~/.config/terminator/config
+echo "$(wget -O- https://gitee.com/rubinbaby/ssh-terminal-themes/raw/master/terminator/yinxiao-light.config)" > ~/.config/terminator/config
 # 国外
-echo "$(wget -O- https://raw.githubusercontent.com/rubinbaby/tech_docs/refs/heads/main/Linux/terminator_config)" > ~/.config/terminator/config
+echo "$(wget -O- https://raw.githubusercontent.com/rubinbaby/ssh-terminal-themes/refs/heads/main/terminator/yinxiao-light.config)" > ~/.config/terminator/config
 ```
 
 ## 2.2、Ranger
