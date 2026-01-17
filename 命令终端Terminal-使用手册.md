@@ -145,3 +145,9 @@ cp ~/.zsh_history ~/.zsh_history_backup
 strings ~/.zsh_history_backup > ~/.zsh_history
 # 其中，strings命令尝试从备份文件中提取可读的字符串，并写入新的历史文件中
 ```
+
+## 4.2、如何把SSH key复制到远端服务器
+```shell
+ssh-copy-id [-p <port>] <user>@<remote_host>
+```
+
