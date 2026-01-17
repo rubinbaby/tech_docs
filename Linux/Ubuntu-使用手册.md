@@ -2,10 +2,11 @@
 ## 1.1、桌面版
 Intel/AMD版本：[https://ubuntu.com/download/desktop](https://ubuntu.com/download/desktop)
 
-ARM版本：[https://cdimage.ubuntu.com/releases/24.04/release/](https://cdimage.ubuntu.com/releases/24.04/release/)
+ARM版本：[https://cdimage.ubuntu.com/releases/](https://cdimage.ubuntu.com/releases/)
 
 ## 1.2、服务器版
 [https://ubuntu.com/download/server](https://ubuntu.com/download/server)
+
 ## 1.3、Multipass
 [https://cloud.tencent.com.cn/developer/article/1982247](https://cloud.tencent.com.cn/developer/article/1982247)
 
@@ -210,32 +211,77 @@ sudo apt install gnome-software-plugin-flatpak
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 ```
 
-#### 3.5.2.2、软件安装
+#### 3.5.2.2、软件安装更新
 ```shell
 # 安装Obsidian
-sudo flatpak install flathub md.obsidian.Obsidian
+flatpak install flathub md.obsidian.Obsidian
 
 # 安装GIMP
-sudo flatpak install flathub org.gimp.GIMP
+flatpak install flathub org.gimp.GIMP
 
 # 安装WPS office
-sudo flatpak install flathub cn.wps.wps_365
+flatpak install flathub cn.wps.wps_365
 
 # 安装微信
-sudo flatpak install flathub com.tencent.WeChat
+flatpak install flathub com.tencent.WeChat
 
 # 安装VLC播放器
-sudo flatpak install flathub org.videolan.VLC
+flatpak install flathub org.videolan.VLC
 
 # 安装Flameshot截图软件
-sudo flatpak install flathub org.flameshot.Flameshot
+flatpak install flathub org.flameshot.Flameshot
+
+# 安装Typora MD软件
+flatpak install flathub io.typora.Typora
+
+# 安装Microsoft VScode
+flatpak install flathub com.visualstudio.code
+
+# 更新
+flatpak update
+```
+
+#### 3.5.2.3、软件卸载
+```shell
+# 1.卸载应用本体并删除其数据
+## 用户安装（默认大多数应用是用户级）：
+flatpak list --user
+flatpak uninstall --user --delete-data <应用ID>
+## 系统安装（需要管理员权限）：
+flatpak list --system
+sudo flatpak uninstall --system --delete-data <应用ID>
+
+# 2. 清理未使用的运行时与扩展
+## 用户级未用依赖：
+flatpak uninstall --user --unused
+## 系统级未用依赖：
+sudo flatpak uninstall --system --unused
+
+# 3. 清理缓存与残留（可选，更彻底）
+rm -rf ~/.cache/flatpak
+## 若曾做过手动覆盖，重置或删除对应文件
+flatpak override --reset <应用ID>  # 重置权限覆盖
+rm -rf ~/.config/flatpak/overrides  # 删除所有覆盖（谨慎）
+
+# 4. 移除不再需要的源（仅在确认不用该仓库时）
+flatpak remotes
+flatpak remote-delete <远程名>     # 用户级
+sudo flatpak remote-delete <远程名> # 系统级
+
+# 5. 一次性“清仓”示例（谨慎执行）
+## 删除所有用户级应用与数据：
+flatpak uninstall --user --all --delete-data
+flatpak uninstall --user --unused
+## 删除所有系统级应用与数据：
+sudo flatpak uninstall --system --all --delete-data
+sudo flatpak uninstall --system --unused
 ```
 
 ### 3.5.3、使用Snap安装软件
 ```shell
-# 安装GIMP
-sudo snap info GIMP
-sudo snap install gimp
+# 安装Gitkraken GIT GUI工具
+sudo snap info gitkraken
+sudo snap install gitkraken --classic
 
 # 删除
 sudo snap remove --purge <应用名>
