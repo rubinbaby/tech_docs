@@ -8,7 +8,7 @@
 ```shell
 lspci | grep -i nvidia
 ```
-输出应包含 NVIDIA Corporation Device [GeForce GT 540M 的 PCI 地址]（如 01:00.0 VGA compatible controller: NVIDIA Corporation GF108M）
+输出应包含 NVIDIA Corporation Device \[GeForce GT 540M 的 PCI 地址\]（如 01:00.0 VGA compatible controller: NVIDIA Corporation GF108M）
 
 ### 1.2.2、安装独立显卡驱动
 XPS L502x 自带的 GT 525M/540M 属于 Fermi 架构，最佳兼容通常在旧版驱动。

@@ -50,11 +50,11 @@ chsh -s /bin/zsh
 主题
 字体：[Meslo LG M Regular for Powerline.ttf](https://github.com/powerline/fonts/blob/master/Meslo%20Slashed/Meslo%20LG%20M%20Regular%20for%20Powerline.ttf)
 
-agnosterzak-ohmyzsh-theme github: [https://github.com/zakaziko99/agnosterzak-ohmyzsh-theme](https://github.com/zakaziko99/agnosterzak-ohmyzsh-theme)
+agnosterzak-ohmyzsh-theme（[Github地址](https://github.com/zakaziko99/agnosterzak-ohmyzsh-theme)）
 
-agnosterzak.zsh-theme: [http://raw.github.com/zakaziko99/agnosterzak-ohmyzsh-theme/master/agnosterzak.zsh-theme](http://raw.github.com/zakaziko99/agnosterzak-ohmyzsh-theme/master/agnosterzak.zsh-theme)
+agnosterzak.zsh-theme（[Github地址](http://raw.github.com/zakaziko99/agnosterzak-ohmyzsh-theme/master/agnosterzak.zsh-theme)）
 
-WSL Ubuntu InputMono font: [https://input.djr.com/download/](https://input.djr.com/download/)
+WSL Ubuntu InputMono font （[下载地址](https://input.djr.com/download/)）
 
 ```shell
 cd $ZSH_CUSTOM/themes
@@ -80,11 +80,11 @@ wget http://mimosa-pudica.net/src/incr-0.2.zsh -O ~/.oh-my-zsh/plugins/incr/incr
 
 ### 2.1.5、SSH Terminal主题
 
-[https://iterm2colorschemes.com](https://iterm2colorschemes.com)
+[iterm2-colors-chemes官网](https://iterm2colorschemes.com)
 
-国外：[https://github.com/rubinbaby/ssh-terminal-themes](https://github.com/rubinbaby/ssh-terminal-themes)
+国外Github地址：[https://github.com/rubinbaby/ssh-terminal-themes](https://github.com/rubinbaby/ssh-terminal-themes)
 
-国内：[https://gitee.com/rubinbaby/ssh-terminal-themes](https://gitee.com/rubinbaby/ssh-terminal-themes)
+国内Gitee地址：[https://gitee.com/rubinbaby/ssh-terminal-themes](https://gitee.com/rubinbaby/ssh-terminal-themes)
 
 ### 2.1.6、自定义终端主题颜色
 ```text

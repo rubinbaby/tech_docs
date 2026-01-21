@@ -39,7 +39,7 @@ pipx upgrade --include-injected ansible
 
 # 3、操作
 ## 3.1、创建多个Linux实例
-参见：[[Linux-使用手册#2、启动Linux实例]]
+参见：[创建和启动Linux实例](../Linux/Linux-使用手册.md#2启动Linux实例)
 
 多个实例服务器不需要安装 Ansible，但需要 Python 来运行由 Ansible 生成的 Python 代码。还需要一个能通过 SSH 连接到该服务器并带有交互式 POSIX shell 的用户账号。
 

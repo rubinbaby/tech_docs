@@ -14,9 +14,10 @@ ARM版本：[https://cdimage.ubuntu.com/releases/](https://cdimage.ubuntu.com/re
 
 # 2、制作U盘启动盘
 ## 2.1、下载U盘启动软件
-[https://rufus.ie/en/#download](https://rufus.ie/en/#download)
+[rufus 启动盘软件下载](https://rufus.ie/en/#download)
 
-教程：[https://documentation.ubuntu.com/desktop/en/latest/how-to/create-a-bootable-usb-stick](https://documentation.ubuntu.com/desktop/en/latest/how-to/create-a-bootable-usb-stick)
+教程：[how to create a bootable usb stick](https://documentation.ubuntu.com/desktop/en/latest/how-to/create-a-bootable-usb-stick)
+
 ## 2.2、载入系统镜像
 ![Pasted image 20251225104246.png](../images/Pasted%20image%2020251225104246.png)
 

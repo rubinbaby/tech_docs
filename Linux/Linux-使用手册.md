@@ -1,5 +1,4 @@
 # 1、国内版本汇总
-
 | 名称       | 链接                                                                                                                 |
 | -------- | ------------------------------------------------------------------------------------------------------------------ |
 | 优麒麟      | [https://www.ubuntukylin.com/index-cn.html](https://www.ubuntukylin.com/index-cn.html)                             |
@@ -11,7 +10,7 @@
 ## 2.1、使用lxd
 LXD 提供“系统容器”，看起来更像轻量级的虚拟机（有完整 init、可运行 systemd 服务）。
 
-### 2.1.1、Ubuntu系统
+### 2.1.1、Ubuntu系统中启用
 1. 安装与初始化
 ```shell
 # 用 snap 安装
@@ -171,24 +170,23 @@ lxc remote add ubuntu-daily https://cloud-images.ubuntu.com/daily --protocol=sim
 ## 2.2、使用Docker
 Docker 更偏向应用容器，默认没有 systemd；如果你只是需要多环境跑命令/进程，非常高效。
 
-### 2.2.1、Ubuntu系统
+### 2.2.1、Ubuntu系统中启用
 1. 安装与检查
 
-[跳转到Ubuntu系统中安装Docker](../devops/Docker总结.md#11Ubuntu系统)
+参见：[Ubuntu系统中安装Docker](../devops/Docker总结.md#11Ubuntu系统)
 
 2. 创建多个容器
 
-[跳转到创建容器](../devops/Docker总结.md#2创建容器)
+参见：[创建容器](../devops/Docker总结.md#2创建容器)
 
 3. 持久化存储与网络
 
-[跳转到存储与网络](../devops/Docker总结.md#3持久化存储与网络)
+参见：[存储与网络](../devops/Docker总结.md#3持久化存储与网络)
 
 4. 常用管理命令
 
-[跳转到常用命令](../devops/Docker总结.md#4常用管理命令)
+参见：[常用命令](../devops/Docker总结.md#4常用管理命令)
 
 ### 2.2.2、常用问题与优化
-
-[跳转到常用问题与优化](../devops/Docker总结.md#5常用问题与优化)
+参见：[常用问题与优化](../devops/Docker总结.md#5常用问题与优化)
 
