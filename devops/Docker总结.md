@@ -1,9 +1,10 @@
 # 1、安装
 ## 1.1、Ubuntu系统
 ```shell
-# Ubuntu 官方安装（参考 Docker 官方文档）
+# 更新系统
 sudo apt update
-sudo apt install -y ca-certificates curl gnupg
+# 安装基础依赖（curl、conntrack、NetworkManager等）
+sudo apt install -y curl apt-transport-https ca-certificates gnupg lsb-release conntrack
 
 # 添加官方 GPG 与源（20.04/22.04/24.04 通用）
 sudo install -m 0755 -d /etc/apt/keyrings
@@ -14,7 +15,8 @@ echo \
   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
 sudo apt update
-sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+sudo apt install -y docker.io
+sudo systemctl enable --now docker
 
 # 允许当前用户管理 docker（避免每次用 sudo）
 sudo usermod -aG docker "$USER"
