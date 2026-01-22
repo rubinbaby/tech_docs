@@ -60,7 +60,9 @@ sudo cd sources.list.d
 sudo cp ubuntu.sources ubuntu.sources.backup.xxx
 sudo sed -i 's@http://ports.ubuntu.com@http://mirrors.aliyun.com@g' ubuntu.sources
 sudo echo "" >> ubuntu.sources
+sudo cat ubuntu.sources.backup.xxx >> ubuntu.sources
 sudo sed -i 's@http://ports.ubuntu.com@http://mirrors.tuna.tsinghua.edu.cn@g' ubuntu.sources
+sudo mv ubuntu.sources.backup.xxx ../
 
 sudo apt update
 ```
@@ -288,8 +290,56 @@ sudo snap install gitkraken --classic
 sudo snap remove --purge <应用名>
 ```
 
-# 4、常见问题
-## 4.1、error while loading shared libraries: libatomic.so.1
+# 4、磁盘扩容
+先判断磁盘布局：
+```shell
+lsblk -f
+# 查看系统磁盘根目录：
+# 1）SATA为/dev/sda；
+# 2）虚拟机为/dev/nvme0n1或者/dev/vda
+
+# 这里以VM虚拟机为例
+sudo fdisk -l /dev/nvme0n1
+df -h
+# 若看到 LVM：
+sudo vgdisplay
+sudo lvdisplay
+```
+
+- 非 LVM（ext4 根分区在 /dev/nvme0n1p1 或 p2 等）
+  目标：把该分区扩到磁盘末尾，然后扩大文件系统
+```shell
+# 1) 扩分区（growpart 的设备参数是“磁盘 + 分区号”，NVMe 例：nvme0n1 1）
+sudo apt-get update && sudo apt-get install -y cloud-guest-utils
+sudo growpart /dev/nvme0n1 1        # 如果根分区是 p1；若是 p2，就把 1 改成 2
+
+# 2) 扩文件系统（ext4）
+sudo resize2fs /dev/nvme0n1p1
+
+# 如果是 XFS 文件系统：
+# sudo xfs_growfs /
+```
+
+- LVM 布局（常见根在 /dev/mapper/ubuntu–vg-ubuntu–lv，PV 在 /dev/nvme0n1p3 等）
+  目标：扩 PV → 扩 LV → 扩文件系统（lvextend -r 会自动做最后一步）
+```shell
+# 1) 先扩 LVM 的物理分区到磁盘末尾（确认 PV 分区号，比如 p3）
+sudo apt-get update && sudo apt-get install -y cloud-guest-utils
+sudo growpart /dev/nvme0n1 3    # 如果PV是p3；按照实际分区号改，切记不要把p写进去
+
+# 2) 让 LVM 识别新增空间
+sudo pvresize /dev/nvme0n1p3
+
+# 3) 把卷组的空闲空间全加到根 LV，并自动扩展文件系统
+sudo lvextend -r -l +100%FREE /dev/mapper/ubuntu--vg-ubuntu--lv
+
+# 验证
+df -h
+sudo lvdisplay
+```
+
+# 5、常见问题
+## 5.1、error while loading shared libraries: libatomic.so.1
 问题：error while loading shared libraries: libatomic.so.1: cannot open shared object file: No such file or directory
 解决：
 - 安装库并刷新链接缓存
@@ -304,7 +354,7 @@ sudo ldconfig
 ldconfig -p | grep libatomic.so.1
 ```
 
-## 4.2、error while loading shared libraries: libz.so
+## 5.2、error while loading shared libraries: libz.so
 问题：error while loading shared libraries: libz.so: cannot open shared object file: No such file or directory
 解决：
 缺少 zlib 的共享库。安装 zlib1g 与 zlib1g-dev 即可。
@@ -320,7 +370,7 @@ sudo ldconfig
 ldconfig -p | grep libz.so
 ```
 
-## 4.3、dlopen(): error loading libfuse.so.2
+## 5.3、dlopen(): error loading libfuse.so.2
 问题：dlopen(): error loading libfuse.so.2     AppImages require FUSE to run.
 解决：
 缺少 libfuse.so.2 导致的；安装 FUSE 库即可解决。
