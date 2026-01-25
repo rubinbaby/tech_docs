@@ -59,6 +59,8 @@ WSL Ubuntu InputMono font （[下载地址](https://input.djr.com/download/)）
 ```shell
 cd $ZSH_CUSTOM/themes
 wget http://raw.github.com/zakaziko99/agnosterzak-ohmyzsh-theme/master/agnosterzak.zsh-theme
+# 国内镜像（可选）
+wget https://gitee.com/mirrors_zakaziko99/agnosterzak-ohmyzsh-theme/raw/master/agnosterzak.zsh-theme
 sed -i 's/ZSH_THEME="robbyrussell"/ZSH_THEME="agnosterzak"/g' ~/.zshrc
 exec zsh
 ```
