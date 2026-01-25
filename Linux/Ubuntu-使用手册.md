@@ -214,6 +214,27 @@ sudo apt install gnome-software-plugin-flatpak
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 ```
 
+如果碰到如下错误：
+**error: Unable to load summary from remote flathub: URI https://dl.flathub.org/repo/summary exceeded maximum size of 10485760 bytes**
+说明Flatpak在下载Flathub的summary文件时，发现它超过了当前Flatpak允许的最大大小（10MB），于是直接拒绝了。
+有如下解决方法：
+1. 先更新Flatpak到最新版本
+老版本Flatpak对summary的大小限制较小，而Flathub这边仓库越来越大，容易触发这个限制。
+```shell
+sudo apt update
+sudo apt install flatpak
+flatpak --version
+```
+
+如果发行版仓库里的Flatpak比较老，可以考虑加官方PPA：
+```shell
+sudo add-apt-repository ppa:alexlarsson/flatpak
+sudo apt update
+sudo apt install flatpak
+```
+
+然后尽量不要使用本地的`.ref`文件，使用`flatpak install`的形式去安装。
+
 #### 3.5.2.2、软件安装更新
 ```shell
 # 安装Obsidian
